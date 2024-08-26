@@ -1,6 +1,7 @@
 (function() {
     const handle = document.querySelector(".handle");
     const sliderWrapper = document.querySelector(".slider-wrapper");
+    const imageSplitter = document.querySelector(".image-splitter");
     let isDragging = false;
 
     function updateSliderPosition(clientX) {
@@ -10,6 +11,10 @@
 
         handle.style.left = handleX + 'px';
         sliderWrapper.style.clipPath = `inset(0 0 0 ${handleX}px)`;
+    }
+
+    function setImageSplitterHeight() {
+        imageSplitter.style.height = window.innerHeight + 'px';
     }
 
     handle.addEventListener("mousedown", (e) => {
@@ -43,6 +48,10 @@
     });
 
     window.addEventListener("resize", () => {
+        setImageSplitterHeight();
         updateSliderPosition(handle.getBoundingClientRect().left + window.scrollX);
     });
+
+    window.addEventListener("load", setImageSplitterHeight);
+
 })();
